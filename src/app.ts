@@ -5,11 +5,15 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 
-app.post("/insertOrgs", (req, res) => {
+app.use("*", (req: any, res: any) => {
+    res.send("<h1>Welcome to your simple server! Awesome right</h1>");
+});
+
+app.post("/insertOrgs", (req: any, res: any) => {
     //TODO
 });
 
-app.get("/getRelatedOrgs:org", (req, res) => {
+app.get("/getRelatedOrgs:org", (req: any, res: any) => {
     //TODO
 });
 
