@@ -8,7 +8,7 @@ import { connectToDb } from '../services/db-connection';
 const expect: Chai.ExpectStatic = chai.expect;
 
 
-describe('connect to database', () => {
+describe('Connect to database', () => {
     let conn: mysql.Connection;
 
     before(async () => {
