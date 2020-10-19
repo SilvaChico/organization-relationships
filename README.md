@@ -11,8 +11,8 @@ response includes all parents, daughters and sisters of a given organization.
 
 - [ ] Implement endpoint 1
   - [x] Create DB connection
-  - [ ] Create DB model
-  - [ ] Create DB insertion
+  - [x] Create DB model
+  - [] Create DB insertion
     - [ ] Create recursive function to insert nested objects
 - [ ] Implement endpoint 2
   - [ ] Create DB query
