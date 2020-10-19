@@ -10,6 +10,7 @@ response includes all parents, daughters and sisters of a given organization.
 ### Steps made:
 
 - [ ] Implement endpoint 1
+  - [x] Create DB connection
   - [ ] Create DB model
   - [ ] Create DB insertion
     - [ ] Create recursive function to insert nested objects
