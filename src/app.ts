@@ -9,30 +9,23 @@ const app = express();
 const PORT = process.env.PORT;
 app.use(express.json());
 
-const server = async () => {
+createModel();
 
-    const connection = await connectToDb();
-    createModel(connection);
+app.post("/insertOrgs", async (req: any, res: any) => {
+    const organization = organizationParser(req.body);
+    if (organization) {
+        await insertOrg(organization);
+        res.status(200).send(`Organizations inserted`);
+    }
+    else
+        res.status(400).send(`Bad Request`);
 
-    app.post("/insertOrgs", async (req: any, res: any) => {
-        const organization = organizationParser(req.body);
-        if (organization) {
-            insertOrg(connection, organization);
-            res.status(200).send(`Organizations inserted`);
-        }
-        else
-            res.status(400).send(`Bad Request`);
+});
 
-    });
+app.get("/getRelatedOrgs:org", (req: any, res: any) => {
+    //TODO
+});
 
-    app.get("/getRelatedOrgs:org", (req: any, res: any) => {
-        //TODO
-    });
-
-    app.listen(PORT, () =>
-        console.log(`Server running on port ${PORT}`)
-    );
-
-}
-
-server();
+app.listen(PORT, () =>
+    console.log(`Server running on port ${PORT}`)
+);

@@ -44,7 +44,7 @@ describe('Insert Organizations', () => {
                     ])
             ]
         );
-        await insertOrg(conn, orgs);
+        await insertOrg(orgs);
 
         expect(
             await dbQuery(conn, `SELECT COUNT(*) AS RESULT FROM ${TableNames.OrgsRelTable}`),

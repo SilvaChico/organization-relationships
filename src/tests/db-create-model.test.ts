@@ -20,7 +20,7 @@ describe('Create model', async () => {
     after(() => conn.end());
 
     it('creates required tables if they do not exist already', async () => {
-        await createModel(conn);
+        await createModel();
         expect(
             await dbQuery(conn, `select * from ${TableNames.OrgsTable}`),
         ).to.be;
