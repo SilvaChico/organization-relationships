@@ -23,10 +23,10 @@ describe('Create model', async () => {
         await createModel(conn);
         expect(
             await dbQuery(conn, `select * from ${TableNames.OrgsTable}`),
-        ).to.be.empty;
+        ).to.be;
         expect(
             await dbQuery(conn, `select * from ${TableNames.OrgsRelTable}`),
-        ).to.be.empty;
+        ).to.be;
     });
 });
 
