@@ -9,7 +9,7 @@ response includes all parents, daughters and sisters of a given organization.
 
 ### Steps made:
 
-- [ ] Implement endpoint 1
+- [x] Implement endpoint 1
   - [x] Create DB connection
   - [x] Create DB model
   - [x] Create DB insertion
