@@ -12,3 +12,9 @@ export class InsertStatements {
     public static OrgsTable = `INSERT INTO ${TableNames.OrgsTable} VALUES (?) ON DUPLICATE KEY UPDATE org_name=org_name;`;
     public static OrgsRelTable = `INSERT INTO ${TableNames.OrgsRelTable} VALUES (?,?) ON DUPLICATE KEY UPDATE parent_org=parent_org;`;
 }
+
+export class GetStatements {
+    public static Parents = `SELECT parent_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE daughter_org = ?`
+    public static Daughters = `SELECT daughter_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE parent_org = ?`
+    public static Sisters = `SELECT daughter_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE parent_org = ? AND daughter_org != ?`
+}
