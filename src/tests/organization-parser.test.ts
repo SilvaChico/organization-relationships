@@ -1,5 +1,4 @@
 import 'mocha';
-import mysql from 'mysql';
 
 import * as chai from 'chai';
 import { organizationParser } from "../services/organization-parser";
