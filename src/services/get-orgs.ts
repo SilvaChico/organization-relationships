@@ -4,21 +4,21 @@ import { connectToDb } from "./db-connection";
 import { dbQueryArgs } from "./db-query";
 
 
-export async function getOrgs(org: string) {
+export async function getOrgs(org: string, page: number) {
     const connection = await connectToDb();
     let orgs = [];
     orgs.push(...await getRelatives(connection, org, 'parent'));
-    orgs.push(...await getRelatives(connection, org, 'sister', orgs.map(value => value.org_name)));
+    orgs.push(...await getRelatives(connection, org, 'sister'));
     orgs.push(...await getRelatives(connection, org, 'daughter'));
     sortOrgs(orgs);
-    orgs = filterUniqueOrgs(orgs);
     connection.end();
     return orgs;
 }
 
-async function getRelatives(connection: Connection, org: string, relationship_type: string, parents: Array<String> = []) {
+async function getRelatives(connection: Connection, org: string, relationship_type: string) {
 
     let queryOutput: Array<any> = [];
+
     if (relationship_type === 'parent')
         queryOutput = await dbQueryArgs(connection, GetStatements.Parents, [org]);
 
@@ -26,10 +26,7 @@ async function getRelatives(connection: Connection, org: string, relationship_ty
         queryOutput = await dbQueryArgs(connection, GetStatements.Daughters, [org]);
 
     else if (relationship_type === 'sister')
-        for (let parent of parents)
-            queryOutput.push(...await dbQueryArgs(connection, GetStatements.Sisters, [parent as string, org]));
-
-
+        queryOutput.push(...await dbQueryArgs(connection, GetStatements.Sisters, [org, org]));
 
     let relatives: Array<any> = [];
 

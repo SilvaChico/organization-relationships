@@ -14,7 +14,7 @@ export class InsertStatements {
 }
 
 export class GetStatements {
-    public static Parents = `SELECT parent_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE daughter_org = ?`
-    public static Daughters = `SELECT daughter_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE parent_org = ?`
-    public static Sisters = `SELECT daughter_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE parent_org = ? AND daughter_org != ?`
+    public static Parents = `SELECT distinct parent_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE daughter_org = ?`
+    public static Daughters = `SELECT distinct daughter_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE parent_org = ?`
+    public static Sisters = `SELECT distinct daughter_org as relative_name FROM ${TableNames.OrgsRelTable} WHERE parent_org in (SELECT distinct parent_org FROM ${TableNames.OrgsRelTable} WHERE daughter_org = ?) and daughter_org != ?;`
 }
