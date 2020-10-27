@@ -1,21 +1,21 @@
 export class Organization {
 
     constructor(
-        private readonly name: string,
-        private daughters: Array<Organization>
+        private readonly name_: string,
+        private daughters_: Array<Organization>
     ) { }
 
     /**
      * getName
      */
-    public getName() {
-        return this.name;
+    public get name() {
+        return this.name_;
     }
     /**
      * getDaughters
      */
-    public getDaughters() {
-        return this.daughters;
+    public get daughters() {
+        return this.daughters_;
     }
 
     /**
