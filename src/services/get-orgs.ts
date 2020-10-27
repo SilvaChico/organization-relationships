@@ -55,16 +55,3 @@ function sortOrgs(orgs: Array<any>) {
         return 0;
     });
 }
-
-function filterUniqueOrgs(orgs: Array<any>) {
-    let filteredOrgs: Array<any> = [];
-
-    orgs.forEach(function (item) {
-        let i = filteredOrgs.findIndex(x => x.org_name == item.org_name);
-        if (i <= -1) {
-            filteredOrgs.push({ org_name: item.org_name, relationship_type: item.relationship_type });
-        }
-    });
-
-    return filteredOrgs;
-}
