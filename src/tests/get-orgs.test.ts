@@ -1,6 +1,5 @@
-import 'mocha';
 import * as chai from 'chai';
-import { getOrgs } from '../services/get-orgs';
+import { getOrgs, slicePage } from '../services/get-orgs';
 
 const expect: Chai.ExpectStatic = chai.expect;
 
@@ -27,18 +26,20 @@ describe('Gets Organizations (Parents, daughters, sisters)', () => {
             "org_name": "Yellow Banana"
         }];
         expect(
-            await getOrgs('Black Banana'),
+            await getOrgs('Black Banana', 1),
         ).to.eql(expectedResult);
     });
+
     it('returns oganization\'s parent', async () => {
         const expectedResult = [{
             "relationship_type": "parent",
             "org_name": "Black Banana"
         }];
         expect(
-            await getOrgs('Phoneutria Spider'),
+            await getOrgs('Phoneutria Spider', 1),
         ).to.eql(expectedResult);
     });
+
     it('returns oganization\'s daughters', async () => {
         const expectedResult = [
             {
@@ -51,9 +52,30 @@ describe('Gets Organizations (Parents, daughters, sisters)', () => {
         ];
 
         expect(
-            await getOrgs('Paradise Island'),
+            await getOrgs('Paradise Island', 1),
         ).to.eql(expectedResult);
 
+    });
+
+
+});
+describe('Pagination', () => {
+
+    it('gets first page', () => {
+        const inputArray = Array(500).fill(0).map((x, i) => i);
+        const outputArray = slicePage(inputArray, 1);
+        expect(
+            outputArray,
+        ).to.eql(Array(100).fill(0).map((x, i) => i));
+
+    });
+
+    it('gets third page', () => {
+        const inputArray = Array(500).fill(0).map((x, i) => i);
+        const outputArray = slicePage(inputArray, 3);
+        expect(
+            outputArray,
+        ).to.eql(Array(100).fill(200).map((x, i) => x + i));
     });
 
 });

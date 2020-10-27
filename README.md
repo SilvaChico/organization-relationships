@@ -16,8 +16,9 @@ response includes all parents, daughters and sisters of a given organization.
     - [x] Create recursive function to insert nested objects
     - [x] Create parser from the recived object
 - [ ] Implement endpoint 2
-  - [ ] Create DB query
-  - [ ] Parse to desired output
+  - [x] Create DB queries
+  - [x] Parse to desired output
+  - [x] Add pagination support
 
 ### Run application by:
 
