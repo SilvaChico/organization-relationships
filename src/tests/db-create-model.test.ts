@@ -22,10 +22,10 @@ describe('Create model', async () => {
     it('creates required tables if they do not exist already', async () => {
         await createModel();
         expect(
-            await dbQuery(conn, `select * from ${TableNames.OrgsTable}`),
+            await dbQuery(conn, `select * from ${TableNames.ORGS_TABLE}`),
         ).to.be;
         expect(
-            await dbQuery(conn, `select * from ${TableNames.OrgsRelTable}`),
+            await dbQuery(conn, `select * from ${TableNames.ORGS_REL_TABLE}`),
         ).to.be;
     });
 });

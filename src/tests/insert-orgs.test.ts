@@ -47,11 +47,11 @@ describe('Insert Organizations', () => {
         await insertOrg(orgs);
 
         expect(
-            await dbQuery(conn, `SELECT COUNT(*) AS RESULT FROM ${TableNames.OrgsRelTable}`),
+            await dbQuery(conn, `SELECT COUNT(*) AS RESULT FROM ${TableNames.ORGS_REL_TABLE}`),
         ).to.eql([{ RESULT: 10 }]);
 
         expect(
-            await dbQuery(conn, `SELECT COUNT(*) AS RESULT FROM ${TableNames.OrgsTable}`),
+            await dbQuery(conn, `SELECT COUNT(*) AS RESULT FROM ${TableNames.ORGS_TABLE}`),
         ).to.eql([{ RESULT: 8 }]);
     });
 });

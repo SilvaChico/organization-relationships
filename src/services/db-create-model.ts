@@ -6,7 +6,7 @@ import { dbQuery } from './db-query'
 
 export async function createModel() {
     const connection = await connectToDb();
-    await dbQuery(connection, TableCreationStatements.OrgsTable);
-    await dbQuery(connection, TableCreationStatements.OrgsRelTable);
+    await dbQuery(connection, TableCreationStatements.ORGS_TABLE);
+    await dbQuery(connection, TableCreationStatements.ORGS_REL_TABLE);
     connection.end();
 };
