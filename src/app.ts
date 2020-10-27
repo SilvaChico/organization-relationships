@@ -1,6 +1,6 @@
 import express from "express";
-import { connectToDb } from "./services/db-connection";
 import { createModel } from "./services/db-create-model";
+import { getOrgs } from "./services/get-orgs";
 import { insertOrg } from "./services/insert-orgs";
 import { organizationParser } from "./services/organization-parser";
 require('dotenv').config();
@@ -22,8 +22,10 @@ app.post("/insertOrgs", async (req: any, res: any) => {
 
 });
 
-app.get("/getRelatedOrgs:org", (req: any, res: any) => {
-    //TODO
+app.get("/getRelatedOrgs/:org", async (req: any, res: any) => {
+    const page: number = parseInt(req.query.page);
+    console.log(`Getting: ${req.params.org}, page: ${page}`);
+    res.send(await getOrgs(req.params.org, page));
 });
 
 app.listen(PORT, () =>
