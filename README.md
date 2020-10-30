@@ -20,13 +20,24 @@ response includes all parents, daughters and sisters of a given organization.
   - [x] Parse to desired output
   - [x] Add pagination support
 
-### Run application by:
+### Run application:
 
+
+Plase create a .env file with the following constants:
+```
+PORT=
+
+DB_HOST=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+```
+Run the application by:
 ```
 $npm install
 $npm run start
 ```
-
 ### Design options
 
 This application was developed using Node.js and MySql (due to task requirements).
