@@ -2,7 +2,7 @@ import 'mocha';
 import mysql from 'mysql';
 
 import * as chai from 'chai';
-import { connectToDb } from '../services/db-connection';
+import { connectToDb } from '../../services/db-connection';
 
 
 const expect: Chai.ExpectStatic = chai.expect;

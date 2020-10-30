@@ -1,32 +1,39 @@
 import 'mocha';
-import mysql from 'mysql';
 
 import * as chai from 'chai';
-import { connectToDb } from '../services/db-connection';
 import { createModel } from "../services/db-create-model";
-import { dbQuery } from "../services/db-query";
-import { TableNames } from "../environment/db-data";
+import * as dbQueries from "../services/db-query";
+import { TableCreationStatements, TableNames } from "../environment/db-data";
+import sinon from 'sinon';
+import * as connectToDb from '../services/db-connection';
 
 
 const expect: Chai.ExpectStatic = chai.expect;
+let sandbox: sinon.SinonSandbox;
+let queryStub: sinon.SinonStub;
+let connStub: sinon.SinonStub;
 
-describe('Create model', async () => {
-    let conn: mysql.Connection;
 
-    before(async () => {
-        conn = await connectToDb();
-    });
+beforeEach(() => {
+    sandbox = sinon.createSandbox();
+    queryStub = sandbox.stub(dbQueries, 'dbQuery');
+    connStub = sandbox.stub(connectToDb, 'connectToDb');
+    connStub.resolves({ end: () => '' });
+});
 
-    after(() => conn.end());
+afterEach(() => {
+    sandbox.restore();
+});
+
+describe('Create model', () => {
 
     it('creates required tables if they do not exist already', async () => {
+        const conn = await connectToDb.connectToDb();
         await createModel();
-        expect(
-            await dbQuery(conn, `select * from ${TableNames.ORGS_TABLE}`),
-        ).to.be;
-        expect(
-            await dbQuery(conn, `select * from ${TableNames.ORGS_REL_TABLE}`),
-        ).to.be;
+        sinon.assert.calledWith(queryStub, conn, TableCreationStatements.ORGS_TABLE);
+        sinon.assert.calledWith(queryStub, conn, TableCreationStatements.ORGS_REL_TABLE);
+        sinon.assert.calledTwice(queryStub);
     });
+
 });
 

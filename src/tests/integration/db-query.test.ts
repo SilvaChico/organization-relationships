@@ -2,8 +2,8 @@ import 'mocha';
 import mysql from 'mysql';
 
 import * as chai from 'chai';
-import { dbQuery, dbQueryArgs } from '../services/db-query';
-import { connectToDb } from '../services/db-connection';
+import { dbQuery, dbQueryArgs } from '../../services/db-query';
+import { connectToDb } from '../../services/db-connection';
 
 
 const expect: Chai.ExpectStatic = chai.expect;

@@ -6,7 +6,10 @@
     "scripts": {
         "dev": "nodemon src/app.ts",
         "start": "ts-node src/app.ts",
-        "test": "mocha -r ts-node/register --recursive ./src/tests/**/*.ts"
+        "test-get-orgs": "mocha -r ts-node/register ./src/tests/get-orgs.test.ts",
+        "test-insert-orgs": "mocha -r ts-node/register ./src/tests/insert-orgs.test.ts",
+        "test-create-model": "mocha -r ts-node/register ./src/tests/db-create-model.test.ts",
+        "test-integration": "mocha -r ts-node/register ./src/tests/integration/*.test.ts"
     },
     "keywords": [],
     "author": "",
@@ -24,8 +27,10 @@
     "devDependencies": {
         "@types/chai": "^4.2.14",
         "@types/mocha": "^8.0.3",
+        "@types/sinon": "^9.0.8",
         "chai": "^4.2.0",
         "mocha": "^8.1.3",
-        "nodemon": "^2.0.5"
+        "nodemon": "^2.0.5",
+        "sinon": "^9.2.1"
     }
 }
