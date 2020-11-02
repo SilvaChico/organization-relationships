@@ -1,10 +1,9 @@
 import { Organization } from "../models/organization";
 import { dbQueryArgs } from "./db-query";
 import { InsertStatements } from "../environment/db-data";
-import { connectToDb } from "./db-connection";
+import { Connection } from "mysql";
 
-export async function insertOrg(org: Organization, parentOrgName: string = '') {
-    const connection = await connectToDb();
+export async function insertOrg(org: Organization, connection: Connection, parentOrgName: string = '') {
     console.log(`Inserting: ${parentOrgName === '' ? 'Root' : parentOrgName} - ${org.name}`);
     dbQueryArgs(connection, InsertStatements.ORGS_TABLE, [org.name]);
 
@@ -12,7 +11,6 @@ export async function insertOrg(org: Organization, parentOrgName: string = '') {
         dbQueryArgs(connection, InsertStatements.ORGS_REL_TABLE, [parentOrgName, org.name]);
 
     org.daughters.forEach((daughterOrg) => {
-        insertOrg(daughterOrg, org.name);
+        insertOrg(daughterOrg, connection, org.name);
     });
-    connection.end();
 }

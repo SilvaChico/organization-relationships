@@ -48,7 +48,7 @@ describe('Insert Organizations', () => {
         );
 
         const connection = await connectToDb.connectToDb();
-        await insertOrg(orgs, '');
+        await insertOrg(orgs, connection);
         setTimeout(() => {
             sinon.assert.calledWith(queryStub, connection, InsertStatements.ORGS_TABLE, ["Paradise Island"]);
             sinon.assert.calledWith(queryStub, connection, InsertStatements.ORGS_TABLE, ["Banana tree"]);
