@@ -1,4 +1,5 @@
 import express from "express";
+import { connectToDb } from "./services/db-connection";
 import { createModel } from "./services/db-create-model";
 import { getOrgs } from "./services/get-orgs";
 import { insertOrg } from "./services/insert-orgs";
@@ -14,7 +15,9 @@ createModel();
 app.post("/insertOrgs", async (req: any, res: any) => {
     const organization = organizationParser(req.body);
     if (organization) {
-        await insertOrg(organization);
+        const connection = await connectToDb();
+        await insertOrg(organization,connection);
+        connection.end();
         res.status(200).send(`Organizations inserted`);
     }
     else
